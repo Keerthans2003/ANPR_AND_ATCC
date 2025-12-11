@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Traffic AI System</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🚦 Smart Traffic AI System</h1>
+            <p>Advanced Vehicle Detection & License Plate Recognition</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="settings-panel">
+                    <h2>⚙ Detection Settings</h2>
+                    
+                    <div class="form-group">
+                        <label>Select Detection Mode</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="mode" value="ATCC" checked>
+                                ATCC – Vehicle Counting
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="mode" value="ANPR">
+                                ANPR – License Plate Detection
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confidence">Detection Confidence Threshold</label>
+                        <div class="slider-container">
+                            <input type="range" id="confidence" min="0.1" max="1.0" step="0.1" value="0.4">
+                            <span id="confidence-value">0.4</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="file-input">📤 Upload File</label>
+                        <input type="file" id="file-input" accept=".jpg,.png,.jpeg,.mp4,.avi,.mov">
+                        <p class="file-hint">ANPR: Images | ATCC: Videos</p>
+                    </div>
+
+                    <button id="analyze-btn" class="btn btn-primary">🚀 Start Analysis</button>
+                    <div id="status" class="status"></div>
+
+                    <!-- Analytics Dashboard Section -->
+                    <div class="analytics-section">
+                        <h3>📊 Dashboard</h3>
+                        <button id="refresh-dashboard-btn" class="btn btn-secondary">🔄 Refresh Stats</button>
+                        
+                        <div id="dashboard-stats" class="dashboard-stats">
+                            <div class="stat-mini">
+                                <p class="label">Total Vehicles</p>
+                                <p class="value" id="total-vehicles-stat">0</p>
+                            </div>
+                            <div class="stat-mini">
+                                <p class="label">License Plates</p>
+                                <p class="value" id="total-plates-stat">0</p>
+                            </div>
+                        </div>
+
+                        <!-- Export Buttons -->
+                        <div class="export-section">
+                            <p style="font-size: 0.9em; margin-bottom: 8px;">💾 Export Data</p>
+                            <button id="export-atcc-btn" class="btn btn-export">Export ATCC</button>
+                            <button id="export-anpr-btn" class="btn btn-export">Export ANPR</button>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Panel -->
+            <main class="main-panel">
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Processing...</p>
+                </div>
+
+                <div id="results" class="results" style="display: none;">
+                    <!-- ATCC Results -->
+                    <div id="atcc-results" style="display: none;">
+                        <h2>🎥 Vehicle Analysis Results</h2>
+                        
+                        <div class="video-preview">
+                            <h3>Sample Frames</h3>
+                            <div id="frames-container" class="frames-container"></div>
+                        </div>
+
+                        <div class="statistics">
+                            <h3>📊 Vehicle Count</h3>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <p class="stat-label">Total Vehicles</p>
+                                    <p class="stat-value" id="total-vehicles">0</p>
+                                </div>
+                            </div>
+
+                            <div class="table-container">
+                                <table id="vehicle-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Vehicle Type</th>
+                                            <th>Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="vehicle-tbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="chart-section">
+                            <h3>📈 Analytics</h3>
+                            <img id="vehicle-chart" src="" alt="Vehicle Distribution Chart">
+                        </div>
+                    </div>
+
+                    <!-- ANPR Results -->
+                    <div id="anpr-results" style="display: none;">
+                        <h2>🔍 License Plate Detection Results</h2>
+                        
+                        <div class="image-results">
+                            <div class="image-column">
+                                <h3>🖼 Input Image</h3>
+                                <img id="input-image" src="" alt="Input Image">
+                            </div>
+
+                            <div class="results-column">
+                                <h3>🔢 Detected License Plates</h3>
+                                <div id="plates-container" class="plates-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="empty-state" class="empty-state">
+                    <p>👈 Select a detection mode, upload a file, and click "Start Analysis"</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="static/script.js"></script>
+</body>
+</html>

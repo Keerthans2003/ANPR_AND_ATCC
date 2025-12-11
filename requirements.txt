@@ -1,0 +1,7 @@
+streamlit==1.28.1
+opencv-python==4.8.1.78
+numpy>=1.26.0
+ultralytics==8.0.185
+easyocr==1.6.2
+matplotlib==3.7.2
+pandas>=2.0.3
